@@ -10,7 +10,6 @@
 @property (nonatomic, retain) NSArray *tabs;
 @property (nonatomic, retain) BCTab *selectedTab;
 @property (nonatomic, assign) id <BCTabBarDelegate> delegate;
-@property (nonatomic, retain) UIImageView *arrow;
 @end
 
 @protocol BCTabBarDelegate

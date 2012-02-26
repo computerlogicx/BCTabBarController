@@ -5,21 +5,15 @@
 @interface BCTabBar ()
 @property (nonatomic, retain) UIImage *backgroundImage;
 
-- (void)positionArrowAnimated:(BOOL)animated;
 @end
 
 @implementation BCTabBar
-@synthesize tabs, selectedTab, backgroundImage, arrow, delegate;
+@synthesize tabs, selectedTab, backgroundImage, delegate;
 
 - (id)initWithFrame:(CGRect)aFrame {
 
 	if (self = [super initWithFrame:aFrame]) {
 		self.backgroundImage = [UIImage imageNamed:@"BCTabBarController.bundle/tab-bar-background.png"];
-		self.arrow = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"BCTabBarController.bundle/tab-arrow.png"]];
-		CGRect r = self.arrow.frame;
-		r.origin.y = - (r.size.height - 2);
-		self.arrow.frame = r;
-		[self addSubview:self.arrow];
 		self.userInteractionEnabled = YES;
 		self.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight | 
 		                        UIViewAutoresizingFlexibleTopMargin;
@@ -65,8 +59,6 @@
 			tab.selected = NO;
 		}
 	}
-	
-	[self positionArrowAnimated:animated];	
 }
 
 - (void)setSelectedTab:(BCTab *)aTab {
@@ -75,20 +67,6 @@
 
 - (void)tabSelected:(BCTab *)sender {
 	[self.delegate tabBar:self didSelectTabAtIndex:[self.tabs indexOfObject:sender]];
-}
-
-- (void)positionArrowAnimated:(BOOL)animated {
-	if (animated) {
-		[UIView beginAnimations:nil context:NULL];
-		[UIView setAnimationDuration:0.2];
-	}
-	CGRect f = self.arrow.frame;
-	f.origin.x = self.selectedTab.frame.origin.x + ((self.selectedTab.frame.size.width / 2) - (f.size.width / 2));
-	self.arrow.frame = f;
-	
-	if (animated) {
-		[UIView commitAnimations];
-	}
 }
 
 - (void)layoutSubviews {
@@ -102,8 +80,6 @@
 		f.origin.x += f.size.width;
 		[self addSubview:tab];
 	}
-	
-	[self positionArrowAnimated:NO];
 }
 
 - (void)setFrame:(CGRect)aFrame {
