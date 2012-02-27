@@ -7,9 +7,9 @@
 - (id)initWithFrame:(CGRect)aFrame;
 - (void)setSelectedTab:(BCTab *)aTab animated:(BOOL)animated;
 
-@property (nonatomic, retain) NSArray *tabs;
-@property (nonatomic, retain) BCTab *selectedTab;
-@property (nonatomic, assign) id <BCTabBarDelegate> delegate;
+@property (nonatomic, strong) NSArray *tabs;
+@property (nonatomic, strong) BCTab *selectedTab;
+@property (nonatomic, unsafe_unretained) id <BCTabBarDelegate> delegate;
 @end
 
 @protocol BCTabBarDelegate
