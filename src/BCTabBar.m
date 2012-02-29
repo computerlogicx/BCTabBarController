@@ -3,7 +3,7 @@
 #define kTabMargin 2.0
 
 @interface BCTabBar ()
-@property (nonatomic, retain) UIImage *backgroundImage;
+@property (nonatomic, retain) UIImageView *backgroundImage;
 @end
 
 @implementation BCTabBar
@@ -14,7 +14,12 @@
 
 	if (self = [super initWithFrame:aFrame]) {
 		
-		self.backgroundImage = [UIImage imageNamed:@"tabBar_iPhone.png"];
+		self.backgroundImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"tabBar_iPhone.png"]];
+		
+		[self.backgroundImage setFrame:self.bounds];
+		[self.backgroundImage setContentMode:UIViewContentModeRedraw];
+		
+		[self addSubview:self.backgroundImage];
 		
 		self.userInteractionEnabled = YES;
 		self.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight | 
@@ -23,14 +28,6 @@
 	}
 	
 	return self;
-}
-
-- (void)drawRect:(CGRect)rect {
-	[super drawRect:rect];
-	/*CGContextRef context = UIGraphicsGetCurrentContext();
-	[self.backgroundImage drawAtPoint:CGPointMake(0, 0)];
-	[[UIColor blackColor] set];
-	CGContextFillRect(context, CGRectMake(0, self.bounds.size.height / 2, self.bounds.size.width, self.bounds.size.height / 2));*/
 }
 
 - (void)setTabs:(NSArray *)array {
