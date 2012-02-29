@@ -4,11 +4,13 @@
 #import "UIViewController+iconImage.h"
 #import "BCTabBarView.h"
 
+#define kUINavigationControllerPushPopAnimationDuration     0.35
+
 @interface BCTabBarController ()
 
 - (void)loadTabs;
 
-@property (nonatomic, retain) UIImageView *selectedTab;
+@property (nonatomic, strong) UIImageView *selectedTab;
 @property (nonatomic, readwrite) BOOL visible;
 
 @end
@@ -155,6 +157,51 @@
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
 	[self.selectedViewController didRotateFromInterfaceOrientation:fromInterfaceOrientation];
+}
+
+- (void)hideTabBar:(BOOL)animated
+{
+    if (tabBar.isInvisible) {
+        return;
+    }
+    tabBar.isInvisible = YES;
+	CGRect f = self.tabBarView.contentView.frame;
+    f.size.height = self.tabBarView.bounds.size.height;
+    self.tabBarView.contentView.frame = f;
+	
+    NSTimeInterval duration = 0.0;
+    if (animated) {
+        duration = kUINavigationControllerPushPopAnimationDuration;
+    }
+    self.tabBar.transform = CGAffineTransformIdentity;
+    [UIView animateWithDuration:duration
+                     animations:^{
+						 self.tabBar.transform = CGAffineTransformMakeTranslation(0.0, self.tabBar.bounds.size.height);
+					 }
+                     completion:^(BOOL finished){
+                         self.tabBar.hidden = YES;
+						 [self.tabBarView setNeedsLayout];
+                     }];
+    
+}
+
+- (void)showTabBar:(BOOL)animated
+{
+    if (!tabBar.isInvisible) {
+        return;
+    }
+    
+    NSTimeInterval duration = 0.0;
+    if (animated) {
+        duration = kUINavigationControllerPushPopAnimationDuration;
+    }
+    tabBar.isInvisible = NO;
+    self.tabBar.transform = CGAffineTransformMakeTranslation(0.0, self.tabBar.bounds.size.height);
+    self.tabBar.hidden = NO;
+    [UIView animateWithDuration:duration
+                     animations:^{self.tabBar.transform = CGAffineTransformIdentity;}
+                     completion:^(BOOL finished){}];
+    [self.tabBarView setNeedsLayout];
 }
 
 @end

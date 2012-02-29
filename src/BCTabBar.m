@@ -3,17 +3,17 @@
 #define kTabMargin 2.0
 
 @interface BCTabBar ()
-@property (nonatomic, retain) UIImageView *backgroundImage;
+@property (nonatomic, strong) UIImageView *backgroundImage;
 @end
 
 @implementation BCTabBar
-@synthesize tabs, selectedTab, backgroundImage, delegate;
+@synthesize tabs, selectedTab, backgroundImage, delegate, isInvisible;
 
 
 - (id)initWithFrame:(CGRect)aFrame {
 
 	if (self = [super initWithFrame:aFrame]) {
-		
+		[self setBackgroundColor:[UIColor blackColor]];
 		self.backgroundImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"tabBar_iPhone.png"]];
 		
 		[self.backgroundImage setFrame:self.bounds];

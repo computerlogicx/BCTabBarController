@@ -10,6 +10,7 @@
 @property (nonatomic, strong) NSArray *tabs;
 @property (nonatomic, strong) BCTab *selectedTab;
 @property (nonatomic, unsafe_unretained) id <BCTabBarDelegate> delegate;
+@property (nonatomic, assign) BOOL isInvisible;
 @end
 
 @protocol BCTabBarDelegate
