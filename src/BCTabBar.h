@@ -4,7 +4,7 @@
 
 @interface BCTabBar : UIView
 
-- (id)initWithFrame:(CGRect)aFrame;
+- (id)initWithFrame:(CGRect)aFrame backgroundImage: (UIImage *)bgImage;
 - (void)setSelectedTab:(BCTab *)aTab animated:(BOOL)animated;
 
 @property (nonatomic, strong) NSArray *tabs;

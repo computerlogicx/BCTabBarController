@@ -10,6 +10,10 @@
 @property (nonatomic) NSUInteger selectedIndex;
 @property (nonatomic, readonly) BOOL visible;
 
+@property (nonatomic, strong) UIImage *tabBarBackground;
+@property (nonatomic, strong) UIImage *tabBarBackgroundSelected;
+
+
 - (void)hideTabBar:(BOOL)animated;
 - (void)showTabBar:(BOOL)animated;
 

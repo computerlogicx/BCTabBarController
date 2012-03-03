@@ -17,7 +17,9 @@
 
 
 @implementation BCTabBarController
+
 @synthesize viewControllers, tabBar, selectedTab, selectedViewController, tabBarView, visible;
+@synthesize tabBarBackground, tabBarBackgroundSelected;
 
 - (void)loadView {
 	self.tabBarView = [[BCTabBarView alloc] initWithFrame:[[UIScreen mainScreen] applicationFrame]];
@@ -25,7 +27,7 @@
 
 	CGFloat tabBarHeight = 38; // tabbar + arrow
 	CGFloat adjust = (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) ? 1 : 0;
-	self.tabBar = [[BCTabBar alloc] initWithFrame:CGRectMake(0, self.view.bounds.size.height - tabBarHeight, self.view.bounds.size.width, tabBarHeight + adjust)];
+	self.tabBar = [[BCTabBar alloc] initWithFrame:CGRectMake(0, self.view.bounds.size.height - tabBarHeight, self.view.bounds.size.width, tabBarHeight + adjust) backgroundImage:self.tabBarBackground];
 	self.tabBar.delegate = self;
 	
 	self.tabBarView.backgroundColor = [UIColor clearColor];
@@ -112,7 +114,7 @@
 - (void)loadTabs {
 	NSMutableArray *tabs = [NSMutableArray arrayWithCapacity:self.viewControllers.count];
 	for (UIViewController *vc in self.viewControllers) {
-		[tabs addObject:[[BCTab alloc] initWithIconImageName:[vc iconImageName]]];
+		[tabs addObject:[[BCTab alloc] initWithIconImageName:[vc iconImageName] bgImageSelected:self.tabBarBackgroundSelected]];
 	}
 	self.tabBar.tabs = tabs;
 	[self.tabBar setSelectedTab:[self.tabBar.tabs objectAtIndex:self.selectedIndex] animated:NO];

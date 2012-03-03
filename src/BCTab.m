@@ -1,18 +1,25 @@
 #import "BCTab.h"
 
 @interface BCTab ()
-@property (nonatomic, retain) UIImage *rightBorder;
-@property (nonatomic, retain) UIImage *background;
+@property (nonatomic, strong) UIImage *rightBorder;
+@property (nonatomic, strong) UIImageView *backgroundImage;
 @end
 
 @implementation BCTab
-@synthesize rightBorder, background;
+@synthesize rightBorder, backgroundImage;
 
-- (id)initWithIconImageName:(NSString *)imageName {
+- (id)initWithIconImageName:(NSString *)imageName bgImageSelected: (UIImage *) bgImage
+{
 	if (self = [super init]) {
 		self.adjustsImageWhenHighlighted = NO;
-		self.background = [UIImage imageNamed:@"BCTabBarController.bundle/tab-background.png"];
-		self.rightBorder = [UIImage imageNamed:@"BCTabBarController.bundle/tab-right-border.png"];
+		
+		self.backgroundImage = [[UIImageView alloc] initWithImage:bgImage];
+		
+		[self.backgroundImage setFrame:self.bounds];
+		[self.backgroundImage setContentMode:UIViewContentModeRedraw];
+		
+		[self addSubview:self.backgroundImage];
+		
 		self.backgroundColor = [UIColor clearColor];
 		
 		NSString *selectedName = [NSString stringWithFormat:@"%@-selected.%@",
@@ -29,18 +36,6 @@
 	// no highlight state
 }
 
-- (void)drawRect:(CGRect)rect {
-	if (self.selected) {
-		[background drawAtPoint:CGPointMake(0, 2)];
-		[rightBorder drawAtPoint:CGPointMake(self.bounds.size.width - rightBorder.size.width, 2)];
-		CGContextRef c = UIGraphicsGetCurrentContext();
-		[RGBCOLOR(24, 24, 24) set]; 
-		CGContextFillRect(c, CGRectMake(0, self.bounds.size.height / 2, self.bounds.size.width, self.bounds.size.height / 2));
-		[RGBCOLOR(14, 14, 14) set];		
-		CGContextFillRect(c, CGRectMake(0, self.bounds.size.height / 2, 0.5, self.bounds.size.height / 2));
-		CGContextFillRect(c, CGRectMake(self.bounds.size.width - 0.5, self.bounds.size.height / 2, 0.5, self.bounds.size.height / 2));
-	}
-}
 
 - (void)setFrame:(CGRect)aFrame {
 	[super setFrame:aFrame];

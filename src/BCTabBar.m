@@ -9,12 +9,12 @@
 @implementation BCTabBar
 @synthesize tabs, selectedTab, backgroundImage, delegate, isInvisible;
 
-
-- (id)initWithFrame:(CGRect)aFrame {
+- (id)initWithFrame:(CGRect)aFrame backgroundImage: (UIImage *)bgImage
+{
 
 	if (self = [super initWithFrame:aFrame]) {
 		[self setBackgroundColor:[UIColor blackColor]];
-		self.backgroundImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"tabBar_iPhone.png"]];
+		self.backgroundImage = [[UIImageView alloc] initWithImage:bgImage];
 		
 		[self.backgroundImage setFrame:self.bounds];
 		[self.backgroundImage setContentMode:UIViewContentModeRedraw];
