@@ -2,26 +2,21 @@
 
 @interface BCTab ()
 @property (nonatomic, strong) UIImage *rightBorder;
-@property (nonatomic, strong) UIImageView *backgroundImage;
+@property (nonatomic, strong) UIImage *backgroundSelected;
 @end
 
 @implementation BCTab
-@synthesize rightBorder, backgroundImage;
+@synthesize rightBorder, backgroundSelected;
 
 - (id)initWithIconImageName:(NSString *)imageName bgImageSelected: (UIImage *) bgImage
 {
 	if (self = [super init]) {
 		self.adjustsImageWhenHighlighted = NO;
 		
-		self.backgroundImage = [[UIImageView alloc] initWithImage:bgImage];
-		
-		[self.backgroundImage setFrame:self.bounds];
-		[self.backgroundImage setContentMode:UIViewContentModeRedraw];
-		
-		[self addSubview:self.backgroundImage];
-		
 		self.backgroundColor = [UIColor clearColor];
 		
+		[self setBackgroundSelected:bgImage];
+				
 		NSString *selectedName = [NSString stringWithFormat:@"%@-selected.%@",
 								   [imageName stringByDeletingPathExtension],
 								   [imageName pathExtension]];
@@ -36,6 +31,37 @@
 	// no highlight state
 }
 
+- (void)drawRect:(CGRect)rect {
+	if (self.selected) {
+		UIColor *bgSelectedPattern = [UIColor colorWithPatternImage: backgroundSelected];
+		
+		CGFloat minx = CGRectGetMinX(rect), maxx = CGRectGetMaxX(rect);
+        CGFloat miny = CGRectGetMinY(rect), maxy = CGRectGetMaxY(rect);
+		
+		
+		CGContextRef context = UIGraphicsGetCurrentContext();
+		
+		CGMutablePathRef a_path = CGPathCreateMutable();
+		CGContextBeginPath(context);
+		
+		
+		
+		//Add a polygon to the path
+		CGContextMoveToPoint(context, minx, miny); 
+		CGContextAddLineToPoint(context, maxx, miny);
+		CGContextAddLineToPoint(context, maxx, maxy);
+		CGContextAddLineToPoint(context, minx, maxy);
+		
+		CGContextClosePath(context);
+		
+		CGContextAddPath(context, a_path);
+		
+		// Fill the path
+		CGContextSetFillColorWithColor(context, [bgSelectedPattern CGColor]);
+		CGContextFillPath(context);
+		CGPathRelease(a_path);
+	}
+}
 
 - (void)setFrame:(CGRect)aFrame {
 	[super setFrame:aFrame];

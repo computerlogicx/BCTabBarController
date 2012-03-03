@@ -117,6 +117,9 @@
 		[tabs addObject:[[BCTab alloc] initWithIconImageName:[vc iconImageName] bgImageSelected:self.tabBarBackgroundSelected]];
 	}
 	self.tabBar.tabs = tabs;
+	
+	NSLog(@"%@", self.tabBarBackgroundSelected);
+	
 	[self.tabBar setSelectedTab:[self.tabBar.tabs objectAtIndex:self.selectedIndex] animated:NO];
 }
 

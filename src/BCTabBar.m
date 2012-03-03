@@ -1,6 +1,6 @@
 #import "BCTabBar.h"
 #import "BCTab.h"
-#define kTabMargin 2.0
+#define kTabMargin 0.0
 
 @interface BCTabBar ()
 @property (nonatomic, strong) UIImageView *backgroundImage;
@@ -76,7 +76,14 @@
 	f.size.width -= (kTabMargin * (self.tabs.count + 1)) / self.tabs.count;
 	for (BCTab *tab in self.tabs) {
 		f.origin.x += kTabMargin;
-		tab.frame = CGRectMake(floorf(f.origin.x), f.origin.y, floorf(f.size.width), f.size.height);
+		
+		CGFloat spacer = 1.0;
+		
+		if ([tab isEqual:self.tabs.lastObject]) {
+			spacer = 0.0;
+		}
+		
+		tab.frame = CGRectMake(floorf(f.origin.x), f.origin.y, floorf(f.size.width-spacer), f.size.height);
 		f.origin.x += f.size.width;
 		[self addSubview:tab];
 	}
