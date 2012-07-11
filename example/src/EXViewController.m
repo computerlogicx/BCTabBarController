@@ -2,35 +2,42 @@
 
 @implementation EXViewController
 
-- (void)viewDidLoad {
-	[super viewDidLoad];
-	self.view.backgroundColor = RGBCOLOR(rand() % 255, rand() % 255, rand() % 255);
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    self.view.backgroundColor = RGBCOLOR(rand() % 255, rand() % 255, rand() % 255);
 }
 
-- (NSString *)iconImageName {
-	return @"magnifying-glass.png";
+- (NSString *)iconImageName
+{
+    return @"magnifying-glass.png";
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation {
-	return YES;
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
+{
+    return YES;
 }
 
-- (void)viewWillAppear:(BOOL)animated {
+- (void)viewWillAppear:(BOOL)animated
+{
     [super viewWillAppear:animated];
     NSLog(@"viewWillAppear");
 }
 
-- (void)viewDidAppear:(BOOL)animated {
+- (void)viewDidAppear:(BOOL)animated
+{
     [super viewDidAppear:animated];
     NSLog(@"viewDidAppear");
 }
 
-- (void)viewWillDisappear:(BOOL)animated {
+- (void)viewWillDisappear:(BOOL)animated
+{
     [super viewWillDisappear:animated];
     NSLog(@"viewWillDisappear");
 }
 
-- (void)viewDidDisappear:(BOOL)animated {
+- (void)viewDidDisappear:(BOOL)animated
+{
     [super viewDidDisappear:animated];
     NSLog(@"viewDidDisappear");
 }

@@ -1,4 +1,5 @@
 #import "BCTabBar.h"
+
 @class BCTabBarView;
 
 @interface BCTabBarController : UIViewController <BCTabBarDelegate>
@@ -15,6 +16,7 @@
 
 
 - (void)hideTabBar:(BOOL)animated;
+
 - (void)showTabBar:(BOOL)animated;
 
 @end

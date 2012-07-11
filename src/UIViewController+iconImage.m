@@ -3,8 +3,9 @@
 
 @implementation UIViewController (BCTabBarController)
 
-- (NSString *)iconImageName {
-	return nil;
+- (NSString *)iconImageName
+{
+    return nil;
 }
 
 @end

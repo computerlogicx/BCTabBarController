@@ -1,5 +1,3 @@
-
-
 @interface UIViewController (BCTabBarController)
 
 - (NSString *)iconImageName;

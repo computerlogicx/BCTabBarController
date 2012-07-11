@@ -1,8 +1,9 @@
 @class BCTabBarController;
 
-@interface EXAppDelegate : NSObject <UIApplicationDelegate> {
-	BCTabBarController *tabBarController;
-	UIWindow *window;
+@interface EXAppDelegate : NSObject <UIApplicationDelegate>
+{
+    BCTabBarController *tabBarController;
+    UIWindow *window;
 }
 
 @property (nonatomic, retain) BCTabBarController *tabBarController;

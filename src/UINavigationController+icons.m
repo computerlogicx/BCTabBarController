@@ -3,8 +3,9 @@
 
 @implementation UINavigationController (BCTabBarController)
 
-- (NSString *)iconImageName {
-	return [[self.viewControllers objectAtIndex:0] iconImageName];
+- (NSString *)iconImageName
+{
+    return [[self.viewControllers objectAtIndex:0] iconImageName];
 }
 
 @end
