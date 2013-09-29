@@ -22,7 +22,7 @@
 
 - (void)loadView
 {
-    self.tabBarView = [[BCTabBarView alloc] initWithFrame:[[UIScreen mainScreen] applicationFrame]];
+    self.tabBarView = [[BCTabBarView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.view = self.tabBarView;
 
     CGFloat tabBarHeight = 38; // tabbar + arrow
