@@ -151,6 +151,8 @@
 {
     self.tabBar = nil;
     self.selectedTab = nil;
+    
+    [super viewDidUnload];
 }
 
 - (void)setViewControllers:(NSArray *)array
